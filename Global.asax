@@ -126,11 +126,23 @@
         //        , { "rootID", "2000" }
         //        , { "CompID", "TW" }
         //        , { "id", "new" }});
-        
+
+        //簽到管理
+        routes.MapPageRoute("myMSignSearch", "{lang}/SignManage", "~/myManage/Search.aspx", false,
+            new RouteValueDictionary {
+                { "lang", "auto" }});
+        routes.MapPageRoute("myMSignEdit", "{lang}/SignManage/Edit/{id}", "~/myManage/Edit.aspx", false,
+         new RouteValueDictionary {
+                { "lang", "auto" }
+                , { "id", "new" }});
+
+        //簽到頁
         routes.MapPageRoute("myConfirm", "{lang}/Sign/{id}", "~/mySign/Confirm.aspx", false);
 
         //Login
         routes.MapPageRoute("myLogin", "{lang}/Login", "~/myPage/Login.aspx", false);
+        //Error
+        routes.MapPageRoute("ErrPage", "Error/{msg}", "~/myPage/ErrorPage.aspx", false);
 
     }
 

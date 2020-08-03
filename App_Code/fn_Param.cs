@@ -167,5 +167,25 @@ public class fn_Param
     }
 
 
+    /// <summary>
+    /// 取得公司地區名
+    /// </summary>
+    /// <param name="val"></param>
+    /// <returns></returns>
+    public static string GetCorpName(string val)
+    {
+        switch (val.ToUpper())
+        {
+            case "SH":
+                return "上海";
+
+            case "SZ":
+                return "深圳";
+
+            default:
+                //TW
+                return "台灣";
+        }
+    }
 
 }

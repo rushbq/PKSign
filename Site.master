@@ -52,9 +52,9 @@
             <div class="page-flexbox-wrapper">
                 <!-- Header Start -->
                 <div class="ui fixed inverted borderless menu pkColor">
-                    <div class="header item">
+                    <a class="header item" href="<%=fn_Param.WebUrl %>">
                         <img src="<%=fn_Param.CDNUrl %>images/portal/link-icon/brand-web.png" alt="Pro'sKit" />
-                    </div>
+                    </a>
                     <div class="header item">
                         <%=Page.Title %>
                     </div>

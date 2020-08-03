@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
+<%@ Import Namespace="PKLib_Method.Methods" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="CssContent" runat="Server">
     <style>
         h1 {
@@ -33,72 +34,89 @@
     <h1 class="ui center aligned header">
         <span class="library">寶工線上簽到
         </span>
-       <%-- <span class="tagline">
-            <%=fn_Param.WebUrl %>
-        </span>--%>
+        <span class="tagline">
+            <%=DateTime.Today.ToString().ToDateString("yyyy 年 M 月 dd 日") %>
+        </span>
     </h1>
     <div class="ui hidden divider"></div>
     <div class="ui segments">
         <div class="ui attached segment">
             <asp:PlaceHolder ID="ph_Data" runat="server">
-                <div class="ui two cards">
-                    <a class="red card" href="<%=FuncPath() %>/Sign/12345">
-                        <div class="content">
-                            <div class="header">2020-7月月會</div>
-                            <div class="meta">
-                                <span class="category">08:30~09:30</span>
+                <asp:ListView ID="lvList" runat="server" ItemPlaceholderID="ph_Items" OnItemDataBound="lvList_ItemDataBound">
+                    <LayoutTemplate>
+                        <asp:PlaceHolder ID="ph_Items" runat="server" />
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                        <a class="ui red fluid card" href="<%=FuncPath() %>/Sign/<%#Eval("Data_ID") %>">
+                            <div class="content">
+                                <div class="header"><%#Eval("Subject") %></div>
                             </div>
-                            <div class="description">
-                                <p>台北六樓教育訓練中心</p>
+                            <div class="content">
+                                <div class="ui large feed">
+                                    <div class="event">
+                                        <div class="content">
+                                            <div class="summary grey-text text-darken-3">
+                                                <i class="clock icon"></i>&nbsp;
+                                                <%#Eval("StartTime").ToString().ToDateString("HH:mm") %> ~ <%#Eval("EndTime").ToString().ToDateString("HH:mm") %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="event">
+                                        <div class="content">
+                                            <div class="summary grey-text text-darken-3">
+                                                <i class="map marker alternate icon"></i>&nbsp;<%#Eval("PlaceName") %>&nbsp;<%#Eval("OtherPlace") %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a class="orange card" href="#">
-                        <div class="content">
-                            <div class="header">2020主管會議</div>
-                            <div class="meta">
-                                <span class="category">08:30~19:30</span>
+                            <asp:PlaceHolder ID="ph_signed" runat="server">
+                                <div class="extra content">
+                                    <div class="right floated teal-text text-darken-2">
+                                        <strong>
+                                            <i class="check icon"></i>
+                                            已簽到&nbsp; at <%#Eval("SignTime").ToString().ToDateString("HH:mm") %>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </asp:PlaceHolder>
+                        </a>
+                    </ItemTemplate>
+                    <AlternatingItemTemplate>
+                        <a class="ui olive fluid card" href="<%=FuncPath() %>/Sign/<%#Eval("Data_ID") %>">
+                            <div class="content">
+                                <div class="header"><%#Eval("Subject") %></div>
                             </div>
-                            <div class="description">
-                                <p>台北六樓教育訓練中心</p>
+                            <div class="content">
+                                <div class="ui large feed">
+                                    <div class="event">
+                                        <div class="content">
+                                            <div class="summary grey-text text-darken-3">
+                                                <i class="clock icon"></i>&nbsp;
+                                                <%#Eval("StartTime").ToString().ToDateString("HH:mm") %> ~ <%#Eval("EndTime").ToString().ToDateString("HH:mm") %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="event">
+                                        <div class="content">
+                                            <div class="summary grey-text text-darken-3">
+                                                <i class="map marker alternate icon"></i>&nbsp;<%#Eval("PlaceName") %>&nbsp;<%#Eval("OtherPlace") %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a class="red card" href="#">
-                        <div class="content">
-                            <div class="header">2020主管會議</div>
-                            <div class="meta">
-                                <span class="category">08:30~19:30</span>
-                            </div>
-                            <div class="description">
-                                <p>台北六樓教育訓練中心</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="orange card" href="#">
-                        <div class="content">
-                            <div class="header">2020主管會議</div>
-                            <div class="meta">
-                                <span class="category">08:30~19:30</span>
-                            </div>
-                            <div class="description">
-                                <p>台北六樓教育訓練中心</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="red card" href="#">
-                        <div class="content">
-                            <div class="header">2020主管會議</div>
-                            <div class="meta">
-                                <span class="category">08:30~19:30</span>
-                            </div>
-                            <div class="description">
-                                <p>台北六樓教育訓練中心</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
+                            <asp:PlaceHolder ID="ph_signed" runat="server">
+                                <div class="extra content">
+                                    <div class="right floated teal-text text-darken-2">
+                                        <i class="check icon"></i>
+                                        已簽到&nbsp; at <%#Eval("SignTime").ToString().ToDateString("HH:mm") %>
+                                    </div>
+                                </div>
+                            </asp:PlaceHolder>
+                        </a>
+                    </AlternatingItemTemplate>
+                </asp:ListView>
             </asp:PlaceHolder>
 
             <!-- Empty Content Start -->
