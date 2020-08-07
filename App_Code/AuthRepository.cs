@@ -35,13 +35,15 @@ namespace AuthData.Controllers
                 sql.AppendLine("SELECT Base.Prog_ID AS MenuID, Base.Up_Id AS ParentID, Base.Prog_Name_{0} AS MenuName".FormatThis(fn_Language.Param_Lang));
                 sql.AppendLine("  , Base.Lv AS Lv, Base.Prog_Link AS Url, Base.Child_Cnt AS Child");
                 sql.AppendLine(" FROM Program Base WITH (NOLOCK)");
-                sql.AppendLine(" INNER JOIN User_Profile_Rel_Program Auth WITH (NOLOCK) ON Base.Prog_ID = Auth.Prog_ID");
-                sql.AppendLine(" WHERE (Auth.[Guid] = @userID) AND (Base.Display = 'Y') AND (UPPER(Base.MenuDisplay) = 'PKSIGN')");
+                sql.AppendLine(" WHERE (Base.Display = 'Y') AND (UPPER(Base.MenuDisplay) = 'PKSIGN')");
+                /* 20200807 - 管理部說開放ALL */
+                //sql.AppendLine(" INNER JOIN User_Profile_Rel_Program Auth WITH (NOLOCK) ON Base.Prog_ID = Auth.Prog_ID");
+                //sql.AppendLine(" WHERE (Auth.[Guid] = @userID) AND (Base.Display = 'Y') AND (UPPER(Base.MenuDisplay) = 'PKSIGN')");
                 sql.AppendLine(" ORDER BY Base.Sort, Base.Prog_ID");
 
                 //----- SQL 執行 -----
                 cmd.CommandText = sql.ToString();
-                cmd.Parameters.AddWithValue("userID", userGuid);
+                //cmd.Parameters.AddWithValue("userID", userGuid);
 
                 //----- 資料取得 -----
                 using (DataTable DT = dbConn.LookupDT(cmd, dbConn.DBS.PKEF, out ErrMsg))

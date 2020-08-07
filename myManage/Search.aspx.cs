@@ -18,20 +18,20 @@ public partial class myManage_Search : SecurityCheck
         {
             if (!IsPostBack)
             {
-                #region --權限--
-                //[權限判斷] Start
+                //#region --權限--
+                ////[權限判斷] Start
 
-                bool isPass = false;
-                isPass = fn_CheckAuth.Check(fn_Param.MemberID, "11012");
+                //bool isPass = false;
+                //isPass = fn_CheckAuth.Check(fn_Param.MemberID, "11012");
 
-                if (!isPass)
-                {
-                    Response.Redirect("{0}Error/您無使用權限".FormatThis(fn_Param.WebUrl));
-                    return;
-                }
+                //if (!isPass)
+                //{
+                //    Response.Redirect("{0}Error/您無使用權限".FormatThis(fn_Param.WebUrl));
+                //    return;
+                //}
 
-                //[權限判斷] End
-                #endregion
+                ////[權限判斷] End
+                //#endregion
 
                 //[產生選單]
                 Get_ClassList(filter_place, "1", "所有資料");

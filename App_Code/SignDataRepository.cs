@@ -633,7 +633,7 @@ namespace SignData.Controllers
 
 
         /// <summary>
-        /// 
+        /// 建立簽到
         /// </summary>
         /// <param name="parentID">單頭ID</param>
         /// <param name="query">單身資料</param>
@@ -676,6 +676,44 @@ namespace SignData.Controllers
                 return dbConn.ExecuteSql(cmd, dbConn.DBS.PKEF, out ErrMsg);
             }
 
+        }
+
+
+        /// <summary>
+        /// 檢查是否已簽
+        /// </summary>
+        /// <param name="dataID"></param>
+        /// <param name="query"></param>
+        /// <param name="ErrMsg"></param>
+        /// <returns>true=已簽, false=未簽</returns>        
+        public bool CheckSign(string dataID, CheckIn query, out string ErrMsg)
+        {
+            //----- 宣告 -----
+            StringBuilder sql = new StringBuilder();
+
+            //----- 資料查詢 -----
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                //----- SQL 查詢語法 -----
+                sql.AppendLine(" SELECT COUNT(*) AS Cnt");
+                sql.AppendLine(" FROM SignBook_CheckIn");
+                sql.AppendLine(" WHERE (Parent_ID = @DataID) AND (SignWho = @SignWho)");
+
+
+                //----- SQL 執行 -----
+                cmd.CommandText = sql.ToString();
+                cmd.Parameters.AddWithValue("DataID", dataID);
+                cmd.Parameters.AddWithValue("SignWho", query.SignWho);
+
+                //----- 資料取得 -----
+                using (DataTable DT = dbConn.LookupDT(cmd, dbConn.DBS.PKEF, out ErrMsg))
+                {
+                    int myCnt = Convert.ToInt32(DT.Rows[0]["Cnt"]);
+
+                    return myCnt.Equals(0) ? false : true;
+                }
+
+            }
         }
 
 
@@ -732,6 +770,7 @@ namespace SignData.Controllers
 
             }
         }
+
 
         #endregion
 

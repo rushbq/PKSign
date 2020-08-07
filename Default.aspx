@@ -124,7 +124,7 @@
                 <div class="ui placeholder segment">
                     <div class="ui icon header">
                         <i class="microphone slash icon"></i>
-                        目前沒有會議要簽到,若有需求請洽管理部.
+                        目前沒有會議要簽到.
                     </div>
                 </div>
             </asp:PlaceHolder>

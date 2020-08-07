@@ -91,6 +91,14 @@ public partial class mySign_Confirm : SecurityCheck
                     IsAgent = "N"
                 };
 
+                //do Check
+                if (_data.CheckSign(Req_DataID, data, out ErrMsg))
+                {
+                    CustomExtension.AlertMsg("重複簽到", FuncPath());
+                    return;
+                }
+
+                //do Create
                 if (false == _data.CreateSign(Req_DataID, data, out ErrMsg))
                 {
                     CustomExtension.AlertMsg("簽到失敗", thisPage);

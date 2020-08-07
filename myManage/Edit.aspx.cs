@@ -18,20 +18,20 @@ public partial class myManage_Edit : SecurityCheck
         {
             if (!IsPostBack)
             {
-                #region --權限--
-                //[權限判斷] Start
+                //#region --權限--
+                ////[權限判斷] Start
 
-                bool isPass = false;
-                isPass = fn_CheckAuth.Check(fn_Param.MemberID, "11011");
+                //bool isPass = false;
+                //isPass = fn_CheckAuth.Check(fn_Param.MemberID, "11011");
 
-                if (!isPass)
-                {
-                    Response.Redirect("{0}Error/您無使用權限".FormatThis(fn_Param.WebUrl));
-                    return;
-                }
+                //if (!isPass)
+                //{
+                //    Response.Redirect("{0}Error/您無使用權限".FormatThis(fn_Param.WebUrl));
+                //    return;
+                //}
 
-                //[權限判斷] End
-                #endregion
+                ////[權限判斷] End
+                //#endregion
 
                 //[產生選單]
                 Get_ClassList(ddl_Place, "1", "請選擇");
@@ -202,6 +202,14 @@ public partial class myManage_Edit : SecurityCheck
                     IsAgent = "Y"
                 };
 
+                //do Check
+                if (_data.CheckSign(Req_DataID, data, out ErrMsg))
+                {
+                    CustomExtension.AlertMsg("重複簽到", thisPage);
+                    return;
+                }
+
+                //do Create
                 if (false == _data.CreateSign(Req_DataID, data, out ErrMsg))
                 {
                     CustomExtension.AlertMsg("代簽失敗", "");
