@@ -467,7 +467,7 @@ public partial class myManage_Edit : SecurityCheck
         string _eTime = tb_EndTime.Text;
         if (Convert.ToDateTime(_sTime) > Convert.ToDateTime(_eTime))
         {
-            errTxt += "會議時間不可逆行\\n";
+            errTxt += "會議簽到時間不可逆行\\n";
         }
 
         //alert

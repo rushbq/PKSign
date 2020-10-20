@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="fields">
                                     <div class="seven wide required field">
-                                        <label>會議時間</label>
+                                        <label>會議簽到時間</label>
                                         <div class="two fields">
                                             <div class="field">
                                                 <div class="ui left icon input datepicker">

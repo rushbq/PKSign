@@ -91,7 +91,7 @@
                                     <th class="grey-bg lighten-3 center aligned">追蹤編號</th>
                                     <th class="grey-bg lighten-3">會議主題</th>
                                     <th class="grey-bg lighten-3 center aligned">地點</th>
-                                    <th class="grey-bg lighten-3 center aligned">時間</th>
+                                    <th class="grey-bg lighten-3 center aligned">簽到時間</th>
                                     <th class="grey-bg lighten-3 center aligned collapsing">前台顯示</th>
                                     <th class="grey-bg lighten-3 center aligned collapsing">與會人數</th>
                                     <th class="grey-bg lighten-3 center aligned collapsing">簽到人數</th>
